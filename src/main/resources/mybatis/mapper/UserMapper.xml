@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mapper.UserMapper">
+
+    <insert id="insert">
+        INSERT INTO user(account, password)
+        VALUES (
+            #{account},
+            #{password}
+        )
+    </insert>
+
+    <select id="listByThingNameKey" resultType="com.smart.domain.User">
+        SELECT account, password
+        FROM `user`
+        <if test="thingNameKey != null and thingNameKey != ''">
+            WHERE account LIKE CONCAT('%', #{thingNameKey}, '%')
+        </if>
+    </select>
+
+    <delete id="delByThingName">
+        DELETE FROM `user`
+        WHERE account = #{thingName}
+    </delete>
+
+</mapper>
