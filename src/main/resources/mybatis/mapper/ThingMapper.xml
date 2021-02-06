@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mapper.ThingMapper">
+
+    <insert id="insert">
+        INSERT INTO thing(thing_name, thing_position, url)
+        VALUES (
+            #{thingName},
+            #{thingPosition},
+            #{url}
+        )
+    </insert>
+
+    <select id="listThing" resultType="com.smart.domain.Thing">
+        SELECT thing_name thingName, thing_position thingPosition, url
+        FROM thing
+    </select>
+
+
+</mapper>

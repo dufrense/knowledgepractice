@@ -8,3 +8,8 @@ mybatis.type-aliases-package: com.smart.domain
 mybatis.mapper-locations: classpath:mybatis/mapper/*.xml
 server:
   port: 8081
+
+spring:
+  servlet:
+    multipart:
+      maxFileSize: 10000000

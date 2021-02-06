@@ -1,7 +1,8 @@
 package com.smart.controller;
 
 import cn.hutool.core.io.FileUtil;
-import com.smart.domain.User;
+import com.smart.domain.Thing;
+import com.smart.mapper.ThingMapper;
 import com.smart.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class SmartController {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ThingMapper thingMapper;
 
 
     @GetMapping("/list.json")
@@ -32,12 +35,6 @@ public class SmartController {
         return Arrays.asList("333", "423434", "32423-----34354533", "4444");
     }
 
-    @GetMapping("/save")
-    public String login(String thingName, String thingPosition) {
-        log.info("account={}, password={}", thingName, thingPosition);
-        userMapper.insert(new User(thingName, thingPosition));
-        return "success";
-    }
 
     @GetMapping("/list")
     public Object list(String thingNameKey) {
@@ -58,7 +55,19 @@ public class SmartController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "e23.tech/images/" + file.getOriginalFilename();
+        return "http://www.e23.tech/images/" + file.getOriginalFilename();
     }
 
+
+
+    @PostMapping("/save")
+    public String save(@RequestBody Thing thing){
+        thingMapper.insert(thing);
+        return "success";
+    }
+
+    @GetMapping("/listThing")
+    public Object listThing(){
+        return thingMapper.listThing();
+    }
 }
